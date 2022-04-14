@@ -23,7 +23,6 @@ module CmClickpost
     end
 
     def send_request(route_param, api_version, request_payload)
-      byebug
       base_url = "https://www.clickpost.in/api/"
       query_params = "/?#{username=@configuration.username}&#{key=@configuration.api_key}"
       
@@ -31,7 +30,6 @@ module CmClickpost
       headers = {'Content-Type': 'application/json' }
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
-      byebug
       puts request_payload.to_json
       request.body = request_payload.to_json
       # Send the request

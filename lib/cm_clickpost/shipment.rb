@@ -53,6 +53,11 @@ module CmClickpost
       @return_address
     end
 
+    def self.track(waybill:, courier_partner_id:)
+      additional_params = "&waybill=#{waybill}&cp_id=#{courier_partner_id}"
+      CmClickpost.send_request(method: 'get', route_param: '/track-order/', api_version: ApiVersion::API_VERSIONS[:track_order], additional_params: additional_params)
+    end
+
     def create_shipping_order
       shipment_details = convert_to_json(@order_details)
       shipment_details.store(:items, convert_to_json(@products))

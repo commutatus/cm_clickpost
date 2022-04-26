@@ -35,14 +35,13 @@ module CmClickpost
     end
     
 
-    def send_request(route_param:, api_version: '', request_payload:)
+    def send_request(method: 'post', route_param:, api_version: '', request_payload: '', additional_params: '')
       query_params = "/?username=#{@configuration.username}&key=#{@configuration.api_key}"
-
-      uri = URI.parse(BASE_URL + api_version + route_param  + query_params)
+      uri = URI.parse(BASE_URL + api_version + route_param  + query_params + additional_params)
       headers = {'Content-Type': 'application/json' }
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
-      request = Net::HTTP::Post.new(uri.request_uri, headers)
+      request = "Net::HTTP::#{method.classify}".constantize.new(uri.request_uri, headers)
       request.body = request_payload.to_json
       response = http.request(request)
       result = JSON.parse(response.body)

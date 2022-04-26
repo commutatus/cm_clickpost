@@ -45,6 +45,11 @@ module CmClickpost
       request.body = request_payload.to_json
       response = http.request(request)
       result = JSON.parse(response.body)
+      if result['meta']['success'] == true
+        return result
+      else
+        raise Exception.new result['meta']['message']
+      end
     end
 
   end 

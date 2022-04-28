@@ -1,20 +1,8 @@
 module CmClickpost
-    class ProductInfo
+    class ProductInfo < CmClickpost::BasePayload
         @@attributes = [:product_url, :price, :description, :additional, :quantity, :sku]
 
-        @@attributes.each do |attribute|
-            define_method(attribute) do
-                @attributes[attribute]
-            end
-
-            define_method("#{attribute}=") do |value|
-                @attributes[attribute] = value
-            end
-        end
-
-        def initialize(attributes = {})
-            @attributes = attributes.slice(*@@attributes)
-        end
+        define_class_methods(@@attributes, @attributes)
 
     end
 end

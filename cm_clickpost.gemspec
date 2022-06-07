@@ -5,8 +5,8 @@ require_relative "lib/cm_clickpost/version"
 Gem::Specification.new do |spec|
   spec.name          = "cm_clickpost"
   spec.version       = CmClickpost::VERSION
-  spec.authors       = ["Jishnu De Sarkar"]
-  spec.email         = ["jishnu@commutatus.com"]
+  spec.authors       = ["Jishnu De Sarkar", "Aditya Tiwari"]
+  spec.email         = ["jishnu@commutatus.com", "taditya.tiwari007@gmail.com"]
 
   spec.summary       = "Clickpost API integration"
   spec.description   = "Clickpost wrapper"

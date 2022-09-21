@@ -1,8 +1,7 @@
 # CmClickpost
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cm_clickpost`. To experiment with that code, run `bin/console` for an interactive prompt.
+CmClickpost is a wrapper gem to [clickpost.ai](https://www.clickpost.ai/). Using this gem you can integrate Clickpost's create order API and tracking API to your project seamlessly.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -22,7 +21,113 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Configuration
+You need to create `initializers/cm_clickpost.rb` file and pass the username and API keys provided to you by Clickpost at the time of registration.
+```ruby CmClickpost.setup([:clickpost_username], [:clickpost_api_key], Rails.env)```
+
+### Create order with Clickost
+To create a forward order with Clickpost you need to use the `Shipment` module provided with this gem. This uses Clickpost's Create Order V3 API. You have to pass the necessary information to create the order. 
+You can read the official documentation about this API [here](https://clickpost.github.io/slate/?json#order-creation-v3-api-forward).
+
+#### Pickup address
+```ruby
+shipment.pickup_address({
+            pickup_name: string, 	
+            pickup_phone: string,
+            pickup_pincode: string,
+            pickup_address: string,
+            pickup_time: DateTime object in iso8601 format,
+            pickup_city: string,	
+            pickup_state: string,	
+            pickup_country: string,	
+            email: string,	
+            tin: string
+        })
+```
+#### Drop Address
+```ruby
+shipment.drop_address({
+            drop_address: string,
+            drop_phone: string,
+            drop_country: string,
+            drop_state: string,
+            drop_pincode: string,
+            drop_city: string,
+            drop_name: string,
+            drop_email: string
+        })
+```
+#### Order details
+```ruby
+shipment.order_details({
+            height: int (in cm),
+            order_type: "COD" or "PREPAID",
+            invoice_value: string,
+            invoice_number: string,
+            invoice_date: string (yyyy-mm-dd),
+            reference_number: string,
+            length: int (in cm),
+            breadth: int (in cm),
+            weight: int (in grams),
+            courier_partner: int (ID of the courier partner that you want to make the order with),
+            cod_value: string (if COD is given as order_type)
+        })
+```
+#### Product details
+In case there are multiple products, wrap this in a loop.
+```ruby
+shipment.product_details({
+            product_url: string,
+            price: string,
+            description: string,
+            quantity: string,
+            sku: string
+        })
+```
+#### GST Information
+```ruby
+shipment.gst_info({
+            seller_gstin: string,
+            taxable_value: string,
+            is_seller_registered_under_gst: bool,
+            place_of_supply: string,
+            hsn_code: string,
+            enterprise_gstin: string,
+            gst_total_tax: string,
+            igst_amount: string,
+            cgst_amount: string,
+            invoice_reference: string,
+        })
+```
+#### Additional Information
+```ruby
+shipment.additional_info({
+            label: bool,
+            gst_number: string,
+            account_code: int (account_code is generated when you add a courier partner in clickpost),
+            order_id: string
+        })
+```
+#### Return address
+```ruby
+shipment.return_address({
+            name: string, 	
+            phone: string,
+            pincode: string,
+            address: string,
+            city: string,	
+            state: string,	
+            country: string,	
+        })
+```
+
+After passing these values simply call `create_shipping_order` and the order will be placed.
+
+```ruby shipment.create_shipping_order```
+
+This method will return the response object in JSON format. From this you can extract the waybill, shipping label pdf link etc. Check out the documentation to learn more. 
+
+
 
 ## Development
 

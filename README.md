@@ -23,7 +23,8 @@ Or install it yourself as:
 
 ### Configuration
 You need to create `initializers/cm_clickpost.rb` file and pass the username and API keys provided to you by Clickpost at the time of registration.
-```ruby CmClickpost.setup([:clickpost_username], [:clickpost_api_key], Rails.env)
+```ruby 
+CmClickpost.setup([:clickpost_username], [:clickpost_api_key], Rails.env)
 ```
 
 ### Create order with Clickost
@@ -123,7 +124,8 @@ shipment.return_address({
 ```
 
 After passing these values simply call `create_shipping_order` and the order will be placed.
-```ruby shipment.create_shipping_order
+```ruby 
+shipment.create_shipping_order
 ```
 
 This method will return the response object in JSON format. From this you can extract the waybill, shipping label pdf link etc. Check out the documentation to learn more.

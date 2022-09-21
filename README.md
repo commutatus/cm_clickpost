@@ -23,7 +23,8 @@ Or install it yourself as:
 
 ### Configuration
 You need to create `initializers/cm_clickpost.rb` file and pass the username and API keys provided to you by Clickpost at the time of registration.
-```ruby CmClickpost.setup([:clickpost_username], [:clickpost_api_key], Rails.env)```
+```ruby CmClickpost.setup([:clickpost_username], [:clickpost_api_key], Rails.env)
+```
 
 ### Create order with Clickost
 To create a forward order with Clickpost you need to use the `Shipment` module provided with this gem. This uses Clickpost's Create Order V3 API. You have to pass the necessary information to create the order. 
@@ -122,12 +123,25 @@ shipment.return_address({
 ```
 
 After passing these values simply call `create_shipping_order` and the order will be placed.
+```ruby shipment.create_shipping_order
+```
 
-```ruby shipment.create_shipping_order```
+This method will return the response object in JSON format. From this you can extract the waybill, shipping label pdf link etc. Check out the documentation to learn more.
 
-This method will return the response object in JSON format. From this you can extract the waybill, shipping label pdf link etc. Check out the documentation to learn more. 
+### Order tracking
+Clickpost provides order tracking in two ways, polling and using webhooks. Tracking using polling can be done using this gem.
 
+#### Polling
+Using `Shipment` Module you can use polling to get the latest tracking information from Clickpost.
 
+```ruby 
+CmClickpost::Shipment.track(waybill: string, courier_partner_id: int)
+```
+
+This will return the track object. You can learn about the response [here](https://clickpost.github.io/slate/?json#tracking-awb-using-polling).
+
+#### Webhooks
+You can use the documentation to use webhooks for real-time tracking. Find about it more [here](https://clickpost.github.io/slate/?json#tracking-awb-using-webhooks).
 
 ## Development
 

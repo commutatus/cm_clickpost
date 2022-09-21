@@ -27,7 +27,7 @@ You need to create `initializers/cm_clickpost.rb` file and pass the username and
 CmClickpost.setup([:clickpost_username], [:clickpost_api_key], Rails.env)
 ```
 
-### Create order with Clickost
+### Create order with Clickpost
 To create a forward order with Clickpost you need to use the `Shipment` module provided with this gem. This uses Clickpost's Create Order V3 API. You have to pass the necessary information to create the order. 
 You can read the official documentation about this API [here](https://clickpost.github.io/slate/?json#order-creation-v3-api-forward).
 
@@ -72,7 +72,7 @@ shipment.order_details({
             breadth: int (in cm),
             weight: int (in grams),
             courier_partner: int (ID of the courier partner that you want to make the order with),
-            cod_value: string (if COD is given as order_type)
+            cod_value: double (if COD is given as order_type)
         })
 ```
 #### Product details
@@ -82,7 +82,7 @@ shipment.product_details({
             product_url: string,
             price: string,
             description: string,
-            quantity: string,
+            quantity: int,
             sku: string
         })
 ```
@@ -90,14 +90,14 @@ shipment.product_details({
 ```ruby
 shipment.gst_info({
             seller_gstin: string,
-            taxable_value: string,
+            taxable_value: double,
             is_seller_registered_under_gst: bool,
             place_of_supply: string,
             hsn_code: string,
             enterprise_gstin: string,
-            gst_total_tax: string,
-            igst_amount: string,
-            cgst_amount: string,
+            gst_total_tax: double,
+            igst_amount: double,
+            cgst_amount: double,
             invoice_reference: string,
         })
 ```

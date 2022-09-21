@@ -80,7 +80,7 @@ In case there are multiple products, wrap this in a loop.
 ```ruby
 shipment.product_details({
             product_url: string,
-            price: string,
+            price: double,
             description: string,
             quantity: int,
             sku: string

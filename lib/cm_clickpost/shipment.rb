@@ -14,42 +14,42 @@ module CmClickpost
       @return_address = nil
     end
 
-    def pickup_address(**args)
-      @pickup_address = CmClickpost::PickupAddress.new(args) if args.present?
+    def pickup_address(args)
+      @pickup_address = CmClickpost::PickupAddress.new(**args) if args.present?
       @pickup_address
     end
 
-    def drop_address(**args)
-      @drop_address = CmClickpost::DropAddress.new(args) if args.present?
+    def drop_address(args)
+      @drop_address = CmClickpost::DropAddress.new(**args) if args.present?
       @drop_address
     end
 
-    def order_details(**args)
-      @order_details = CmClickpost::Order.new(args) if args.present?
+    def order_details(args)
+      @order_details = CmClickpost::Order.new(**args) if args.present?
       @order_details
     end
 
-    def product_details(**args)
+    def product_details(args)
       if args.present?
-        @product_details = CmClickpost::ProductInfo.new(args) 
+        @product_details = CmClickpost::ProductInfo.new(**args) 
         @products << @product_details
         return @product_details
       end
       @products
     end
 
-    def gst_info(**args)
-      @gst_info = CmClickpost::GstInfo.new(args) if args.present?
+    def gst_info(args)
+      @gst_info = CmClickpost::GstInfo.new(**args) if args.present?
       @gst_info
     end
 
-    def additional_info(**args)
-      @additional_info = CmClickpost::AdditionalInfo.new(args) if args.present?
+    def additional_info(args)
+      @additional_info = CmClickpost::AdditionalInfo.new(**args) if args.present?
       @additional_info
     end
 
-    def return_address(**args)
-      @return_address = CmClickpost::ReturnAddress.new(args) if args.present?
+    def return_address(args)
+      @return_address = CmClickpost::ReturnAddress.new(**args) if args.present?
       @return_address
     end
 

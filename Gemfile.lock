@@ -1,0 +1,20 @@
+PATH
+  remote: .
+  specs:
+    cm_clickpost (0.1.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rake (13.2.1)
+
+PLATFORMS
+  arm64-darwin-20
+  arm64-darwin-23
+
+DEPENDENCIES
+  cm_clickpost!
+  rake (~> 13.0)
+
+BUNDLED WITH
+   2.2.33
